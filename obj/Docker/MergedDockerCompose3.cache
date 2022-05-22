@@ -1,0 +1,59 @@
+name: dockercompose12826026907944357852
+services:
+  istatplab2:
+    build:
+      context: D:\учеба\прога\istatplab2
+      dockerfile: istatplab2/Dockerfile
+    depends_on:
+      sqlserverService:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: istatplab2
+    networks:
+      musicnet: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\Соня\AppData\Roaming/Microsoft/UserSecrets
+      target: /root/.microsoft/usersecrets
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\Соня\AppData\Roaming/ASP.NET/Https
+      target: /root/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
+  sqlserverService:
+    container_name: sqlserverService
+    environment:
+      ACCEPT_EULA: "true"
+      SA_PASSWORD: Soficus123!
+    hostname: sqlserverService
+    image: mcr.microsoft.com/mssql/server:latest
+    networks:
+      musicnet: null
+    ports:
+    - mode: ingress
+      target: 1433
+      published: "1433"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: D:\учеба\прога\istatplab2\data\mssql
+      target: /var/opt/mssql3
+      bind:
+        create_host_path: true
+networks:
+  musicnet:
+    name: dockercompose12826026907944357852_musicnet
+    driver: bridge

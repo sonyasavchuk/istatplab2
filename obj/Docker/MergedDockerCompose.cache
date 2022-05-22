@@ -1,0 +1,16 @@
+services:
+  istatplab2:
+    build:
+      context: D:\учеба\прога\istatplab2
+      dockerfile: istatplab2/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: istatplab2
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\Соня\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\Соня\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'
