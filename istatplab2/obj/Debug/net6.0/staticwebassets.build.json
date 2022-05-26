@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AtHbYsSRAIaZ3ROpJayEZetMzbHt6gjEGYxlfb6vDCY=",
+  "Hash": "nmMnLSCZM6Emvxzcyrd268qfhnVu0sO03fun9kzu54I=",
   "Source": "istatplab2",
   "BasePath": "_content/istatplab2",
   "Mode": "Default",
@@ -83,6 +83,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\учеба\\прога\\istatplab2\\istatplab2\\wwwroot\\Index.html",
+      "SourceId": "istatplab2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\учеба\\прога\\istatplab2\\istatplab2\\wwwroot\\",
+      "BasePath": "_content/istatplab2",
+      "RelativePath": "Index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Index.html"
+    },
+    {
+      "Identity": "D:\\учеба\\прога\\istatplab2\\istatplab2\\wwwroot\\js\\lab2.js",
+      "SourceId": "istatplab2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\учеба\\прога\\istatplab2\\istatplab2\\wwwroot\\",
+      "BasePath": "_content/istatplab2",
+      "RelativePath": "js/lab2.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\lab2.js"
     },
     {
       "Identity": "D:\\учеба\\прога\\istatplab2\\istatplab2\\wwwroot\\js\\site.js",

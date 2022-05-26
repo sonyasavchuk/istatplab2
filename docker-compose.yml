@@ -2,21 +2,26 @@ version: '3.4'
 
 services:
   istatplab2:
-    image: ${DOCKER_REGISTRY-}istatplab2
+    image: musicapi
     build:
       context: .
       dockerfile: istatplab2/Dockerfile
     depends_on:
       - sqlserverService
     networks:
+      # називаємо як хочете
       - musicnet
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      # додаємо конекшн стрінг для вашого контексту
+      - ConnectionStrings:DefaultConnection=Server=sqlserverService;Initial Catalog=MusicApi;User=sa;Password=Soficus123!;Trusted_Connection=False;MultipleActiveResultSets=true
     ports:
-      - "80"
-      - "443"
+      # додаємо реадресацію для вашого порту
+      - "4438:80"
+      - "4439:443"
   sqlserverService:
+    # встановлюємо субд для вашого сервісу
     image: mcr.microsoft.com/mssql/server:latest
     hostname: sqlserverService
     container_name: sqlserverService
@@ -26,6 +31,7 @@ services:
     volumes:
       - ./data/mssql:/var/opt/mssql3
     ports:
+      # порт 1433 для обміну між клієнтами та сервером (він зарезервований спеціально під це)
       - 1433:1433
     networks:
       - musicnet

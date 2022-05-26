@@ -1,6 +1,6 @@
 using istatplab2.Models;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -15,10 +15,7 @@ builder.Services.AddDbContext<MusicAPIContext>(option => option.UseSqlServer(
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
-{
-    await scope.ServiceProvider.GetRequiredService<MusicAPIContext>().Database.MigrateAsync();
-}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -31,12 +28,12 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseRouting();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
 app.UseAuthorization();
 

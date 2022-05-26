@@ -1,22 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace istatplab2.Models
+namespace istatplab2.Models;
+
+public class MusicAPIContext : DbContext
 {
-    public class MusicAPIContext : DbContext
+    public MusicAPIContext(DbContextOptions<MusicAPIContext> options) : base(options)
     {
-        public virtual DbSet<Albums> Albums { get; set; }
-        public virtual DbSet<Artists> Artists { get; set; }
-        public virtual DbSet<Genres> Genres { get; set; }
-        public virtual DbSet<Playlists> Playlists { get; set; }
-        public virtual DbSet<PlaylistsTracks> PlaylistsTracks { get; set; }
-        public virtual DbSet<Tracks> Tracks { get; set; }
+        Database.EnsureCreated();
+    }
 
-        public MusicAPIContext(DbContextOptions<MusicAPIContext> options ): base(options)
-        {
-            Database.EnsureCreated();
-        }
+    public virtual DbSet<Albums> Albums { get; set; }
+    public virtual DbSet<Artists> Artists { get; set; }
+    public virtual DbSet<Genres> Genres { get; set; }
+    public virtual DbSet<Playlists> Playlists { get; set; }
+    public virtual DbSet<PlaylistsTracks> PlaylistsTracks { get; set; }
+    public virtual DbSet<Tracks> Tracks { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Albums>(entity =>
         {
@@ -34,23 +34,21 @@ namespace istatplab2.Models
 
         modelBuilder.Entity<Artists>(entity =>
         {
-
             entity.Property(e => e.Id).HasColumnName("id");
 
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(255);
-            
         });
 
         modelBuilder.Entity<Playlists>(entity =>
         {
             entity.Property(e => e.Id).HasColumnName("id");
-            
+
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(255);
-            
+
 
             entity.HasMany(c => c.Tracks)
                 .WithMany(a => a.Playlists)
@@ -65,12 +63,11 @@ namespace istatplab2.Models
                         .WithMany()
                         .HasForeignKey(d => d.PlaylistId)
                         .OnDelete(DeleteBehavior.ClientCascade),
-                        builder => builder
+                    builder => builder
                         .ToTable("PlaylistsTracks")
-                        
                 );
         });
-        
+
 
         modelBuilder.Entity<Tracks>(entity =>
         {
@@ -90,21 +87,14 @@ namespace istatplab2.Models
                 .WithMany(p => p.Tracks)
                 .HasForeignKey(d => d.GenreId)
                 .OnDelete(DeleteBehavior.ClientCascade);
-
-            
         });
         modelBuilder.Entity<Genres>(entity =>
         {
-
             entity.Property(e => e.Id).HasColumnName("id");
 
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(255);
-            
         });
-        
-    }
-
     }
 }
